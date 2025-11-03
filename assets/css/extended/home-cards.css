@@ -1,52 +1,51 @@
-/* Home hero */
-.home-hero {
-  margin: 2rem 0 1.5rem;
-  text-align: left;
-}
-.home-hero h1 {
-  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
-  margin: 0 0 .4rem;
-}
-.home-hero .subtitle {
-  opacity: .8;
+/* ===== Responsive Typography (all devices) ===== */
+:root{
+  /* 根字号：随屏宽轻微变化，控制全站基调 */
+  --fs-base: clamp(15px, 0.6vw + 12px, 17px);
+
+  /* 首页/列表卡片标题（控制“不要太大”） */
+  --fs-card-title: clamp(1.06rem, 0.8vw + 0.85rem, 1.35rem);
+
+  /* 文章页标题（单篇页面的 H1） */
+  --fs-single-title: clamp(1.25rem, 1.0vw + 1.00rem, 1.80rem);
+
+  /* 正文与小标题 */
+  --fs-body: clamp(0.95rem, 0.45vw + 0.82rem, 1.06rem);
+  --fs-h2:   clamp(1.12rem, 0.9vw + 0.90rem, 1.55rem);
+  --fs-h3:   clamp(1.02rem, 0.7vw + 0.85rem, 1.30rem);
+
+  /* 元信息（日期/分类等） */
+  --fs-meta: clamp(0.82rem, 0.35vw + 0.68rem, 0.95rem);
 }
 
-/* Card grid */
-.post-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-@media (min-width: 720px) {
-  .post-grid { grid-template-columns: 1fr 1fr; }
-}
-@media (min-width: 1100px) {
-  .post-grid { grid-template-columns: 1fr 1fr 1fr; }
+html { font-size: var(--fs-base); }
+body { font-size: 1rem; line-height: 1.65; }
+
+/* 首页横幅标题：保持克制 */
+.home-hero h1 { font-size: clamp(1.4rem, 1.6vw + 0.9rem, 2rem); }
+
+/* —— 列表/卡片标题（PaperMod 默认 + 你的自定义卡片） —— */
+.post-entry .entry-header h2,
+.post-card .post-title{
+  font-size: var(--fs-card-title);
+  line-height: 1.35;
+  margin: 0 0 .35rem;
+  font-weight: 700;
 }
 
-.post-card {
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 1rem 1.1rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,.04);
-  background: var(--theme);
-  transition: transform .08s ease, box-shadow .08s ease;
-}
-.post-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,.08);
-}
-.post-card .post-title {
-  font-weight: 600;
-  text-decoration: none;
-  display: inline-block;
-  margin-bottom: .4rem;
-}
-.post-card .meta {
-  font-size: .9rem;
+/* 元信息 */
+.post-entry .entry-footer,
+.post-card .meta{
+  font-size: var(--fs-meta);
   opacity: .8;
   margin-bottom: .4rem;
 }
-.post-card .summary{
-  margin: 0;
+
+/* 正文与小标题（单篇页面） */
+.post-single .post-title, .single .post-title{
+  font-size: var(--fs-single-title);
+  line-height: 1.28;
 }
+.post-content{ font-size: var(--fs-body); }
+.post-content h2{ font-size: var(--fs-h2); }
+.post-content h3{ font-size: var(--fs-h3); }
