@@ -1,41 +1,42 @@
-/* ===== 列表卡片间距与内边距（仅首页/列表页生效） ===== */
+/* ===== 卡片间距与边框粗细：适中版 ===== */
+:root{
+  /* 统一可调的间距/粗细变量 */
+  --card-gap-y: .9rem;      /* 卡片与卡片之间的上下距离 */
+  --card-pad-x: 1.2rem;     /* 卡片左右内边距 */
+  --card-pad-y: .95rem;     /* 卡片上下内边距 */
+  --card-border-w: 1.25px;  /* 边框粗细：高分屏也清楚 */
+}
+
+/* 首页/列表卡片的“呼吸感” */
 .home .post-entry,
 .list .post-entry{
-  padding: 1rem 1.25rem 1.05rem;   /* 卡片内边距：左右更宽一点 */
-  margin: 1rem 0;                  /* 卡片上下间距：拉开卡片之间距离 */
+  margin: var(--card-gap-y) 0;
+  padding: var(--card-pad-y) var(--card-pad-x);
+  border-width: var(--card-border-w) !important;
+  border-style: solid !important;
+  border-color: var(--card-border) !important;
   border-radius: var(--card-radius) !important;
-  border: 1px solid var(--card-border) !important;
   box-shadow: var(--card-shadow);
   background: var(--entry, var(--theme));
 }
 
-/* 第一张与顶部横幅之间再留空；最后一张与底部留空 */
-.home .post-entry:first-of-type{ margin-top: 1.2rem; }
-.home .post-entry:last-of-type,
-.list .post-entry:last-of-type{ margin-bottom: 1.2rem; }
+/* 标题与内容的局部间距，保持克制 */
+.post-entry .entry-header h2{ margin: 0 0 .38rem; line-height: 1.35; }
+.post-entry .entry-content{ margin-top: .34rem; }
+.post-entry .entry-footer{ margin-top: .38rem; }
 
-/* 小屏两侧加“安全边距”，避免贴屏 */
+/* 小屏更紧一点，避免“撑满贴边”；大屏略松一点 */
 @media (max-width: 680px){
-  .home .post-entry,
-  .list .post-entry{
-    margin-left: .6rem;
-    margin-right: .6rem;
+  :root{
+    --card-gap-y: .8rem;
+    --card-pad-x: 1rem;
+    --card-pad-y: .9rem;
   }
 }
-
-/* 中大屏稍微更松一点（可按喜好再调） */
-@media (min-width: 900px){
-  .home .post-entry,
-  .list .post-entry{
-    padding: 1.1rem 1.4rem 1.15rem;
-    margin: 1.1rem 0;
+@media (min-width: 960px){
+  :root{
+    --card-gap-y: 1rem;
+    --card-pad-x: 1.35rem;
+    --card-pad-y: 1rem;
   }
 }
-
-/* 卡片内部的小间距微调（标题/摘要/元信息） */
-.post-entry .entry-header h2{ margin: 0 0 .4rem; line-height: 1.35; }
-.post-entry .entry-content{ margin-top: .35rem; }
-.post-entry .entry-footer{ margin-top: .4rem; font-size: var(--fs-meta, .9rem); }
-
-/* 如果你也在用自定义 .post-card，保持一致的内外距（可选） */
-.post-card{ padding: 1rem 1.25rem; margin: 1rem 0; }
