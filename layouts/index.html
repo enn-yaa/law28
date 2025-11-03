@@ -1,0 +1,23 @@
+{{- define "main" -}}
+  <section class="home-hero">
+    <h1>{{ with .Site.Params.home.title }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}</h1>
+    {{ with .Site.Params.home.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+  </section>
+
+  <section class="post-grid">
+    {{/* List latest 10 posts across the site (exclude hidden) */}}
+    {{ $pages := where .Site.RegularPages "Params.hidden" "ne" true }}
+    {{ $pages = sort $pages "Date" "desc" }}
+    {{ range first 10 $pages }}
+      <article class="post-card">
+        <a class="post-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <div class="meta">
+          <time datetime="{{ .Date }}">{{ .Date.Format "2006-01-02" }}</time>
+          {{ with .Section }} · <span class="section">{{ . }}</span>{{ end }}
+          {{ with .Params.categories }} · <span class="cats">{{ delimit . ", " }}</span>{{ end }}
+        </div>
+        <p class="summary">{{ .Summary | plainify | truncate 160 }}</p>
+      </article>
+    {{ end }}
+  </section>
+{{- end -}}
