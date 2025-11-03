@@ -49,3 +49,26 @@ body { font-size: 1rem; line-height: 1.65; }
 .post-content{ font-size: var(--fs-body); }
 .post-content h2{ font-size: var(--fs-h2); }
 .post-content h3{ font-size: var(--fs-h3); }
+
+/* ===== 维持卡片边框与阴影 ===== */
+.post-card {
+  border: 1px solid var(--border, rgba(0,0,0,0.08)); /* 若变量无效时回退 */
+  border-radius: 16px;
+  background: var(--theme);
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+/* ===== 字体响应式调整（保持前面定义） ===== */
+.post-entry .entry-header h2,
+.post-card .post-title {
+  font-size: clamp(1.06rem, 0.8vw + 0.85rem, 1.35rem);
+  line-height: 1.35;
+  margin: 0 0 .35rem;
+  font-weight: 700;
+}
