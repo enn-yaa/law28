@@ -1,42 +1,73 @@
-/* ===== 卡片间距与边框粗细：适中版 ===== */
+/* ===== Responsive Typography (all devices) ===== */
 :root{
-  /* 统一可调的间距/粗细变量 */
-  --card-gap-y: .9rem;      /* 卡片与卡片之间的上下距离 */
-  --card-pad-x: 1.2rem;     /* 卡片左右内边距 */
-  --card-pad-y: .95rem;     /* 卡片上下内边距 */
-  --card-border-w: 1.25px;  /* 边框粗细：高分屏也清楚 */
+  /* 根字号：随屏宽轻微变化，控制全站基调 */
+  --fs-base: clamp(15px, 0.6vw + 12px, 17px);
+
+  /* 首页/列表卡片标题（控制“不要太大”） */
+  --fs-card-title: clamp(1.06rem, 0.8vw + 0.85rem, 1.35rem);
+
+  /* 文章页标题（单篇页面的 H1） */
+  --fs-single-title: clamp(1.25rem, 1.0vw + 1.00rem, 1.80rem);
+
+  /* 正文与小标题 */
+  --fs-body: clamp(0.95rem, 0.45vw + 0.82rem, 1.06rem);
+  --fs-h2:   clamp(1.12rem, 0.9vw + 0.90rem, 1.55rem);
+  --fs-h3:   clamp(1.02rem, 0.7vw + 0.85rem, 1.30rem);
+
+  /* 元信息（日期/分类等） */
+  --fs-meta: clamp(0.82rem, 0.35vw + 0.68rem, 0.95rem);
 }
 
-/* 首页/列表卡片的“呼吸感” */
-.home .post-entry,
-.list .post-entry{
-  margin: var(--card-gap-y) 0;
-  padding: var(--card-pad-y) var(--card-pad-x);
-  border-width: var(--card-border-w) !important;
-  border-style: solid !important;
-  border-color: var(--card-border) !important;
+html { font-size: var(--fs-base); }
+body { font-size: 1rem; line-height: 1.65; }
+
+/* 首页横幅标题：保持克制 */
+.home-hero h1 { font-size: clamp(1.4rem, 1.6vw + 0.9rem, 2rem); }
+
+/* —— 列表/卡片标题（PaperMod 默认 + 你的自定义卡片） —— */
+.post-entry .entry-header h2,
+.post-card .post-title{
+  font-size: var(--fs-card-title);
+  line-height: 1.35;
+  margin: 0 0 .35rem;
+  font-weight: 700;
+}
+
+/* 元信息 */
+.post-entry .entry-footer,
+.post-card .meta{
+  font-size: var(--fs-meta);
+  opacity: .8;
+  margin-bottom: .4rem;
+}
+
+/* 正文与小标题（单篇页面） */
+.post-single .post-title, .single .post-title{
+  font-size: var(--fs-single-title);
+  line-height: 1.28;
+}
+.post-content{ font-size: var(--fs-body); }
+.post-content h2{ font-size: var(--fs-h2); }
+.post-content h3{ font-size: var(--fs-h3); }
+
+/* ===== 强化卡片边框与底色（浅色/深色都好看） ===== */
+:root{
+  --card-radius: 16px;
+  --card-shadow: 0 1px 6px rgba(0,0,0,.05);
+  --card-border: rgba(0,0,0,.10); /* light mode */
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --card-shadow: 0 1px 10px rgba(0,0,0,.35);
+    --card-border: rgba(255,255,255,.14); /* dark mode */
+  }
+}
+
+/* PaperMod 列表卡片 + 你的自定义卡片 */
+.post-entry,
+.post-card{
+  background: var(--entry, var(--theme)) !important; /* 保持卡片底色与页面有对比 */
+  border: 1px solid var(--card-border) !important;   /* 边框更清晰 */
   border-radius: var(--card-radius) !important;
   box-shadow: var(--card-shadow);
-  background: var(--entry, var(--theme));
-}
-
-/* 标题与内容的局部间距，保持克制 */
-.post-entry .entry-header h2{ margin: 0 0 .38rem; line-height: 1.35; }
-.post-entry .entry-content{ margin-top: .34rem; }
-.post-entry .entry-footer{ margin-top: .38rem; }
-
-/* 小屏更紧一点，避免“撑满贴边”；大屏略松一点 */
-@media (max-width: 680px){
-  :root{
-    --card-gap-y: .8rem;
-    --card-pad-x: 1rem;
-    --card-pad-y: .9rem;
-  }
-}
-@media (min-width: 960px){
-  :root{
-    --card-gap-y: 1rem;
-    --card-pad-x: 1.35rem;
-    --card-pad-y: 1rem;
-  }
 }
