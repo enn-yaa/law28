@@ -1,37 +1,41 @@
-/* ===== 列表卡片（PaperMod 的 .post-entry）呼吸感与边框 ===== */
-:root{
-  --card-radius: 16px;
-  --card-shadow: 0 1px 6px rgba(0,0,0,.05);
-  --card-border: rgba(0,0,0,.10);
+/* ===== 列表卡片间距与内边距（仅首页/列表页生效） ===== */
+.home .post-entry,
+.list .post-entry{
+  padding: 1rem 1.25rem 1.05rem;   /* 卡片内边距：左右更宽一点 */
+  margin: 1rem 0;                  /* 卡片上下间距：拉开卡片之间距离 */
+  border-radius: var(--card-radius) !important;
+  border: 1px solid var(--card-border) !important;
+  box-shadow: var(--card-shadow);
+  background: var(--entry, var(--theme));
 }
-@media (prefers-color-scheme: dark){
-  :root{
-    --card-shadow: 0 1px 10px rgba(0,0,0,.35);
-    --card-border: rgba(255,255,255,.14);
+
+/* 第一张与顶部横幅之间再留空；最后一张与底部留空 */
+.home .post-entry:first-of-type{ margin-top: 1.2rem; }
+.home .post-entry:last-of-type,
+.list .post-entry:last-of-type{ margin-bottom: 1.2rem; }
+
+/* 小屏两侧加“安全边距”，避免贴屏 */
+@media (max-width: 680px){
+  .home .post-entry,
+  .list .post-entry{
+    margin-left: .6rem;
+    margin-right: .6rem;
   }
 }
 
-/* 首页与列表页的卡片外观与间距 */
-.home .post-entry,
-.list .post-entry{
-  background: var(--entry, var(--theme)) !important;
-  border: 1px solid var(--card-border) !important;
-  border-radius: var(--card-radius) !important;
-  box-shadow: var(--card-shadow);
-  padding: 1rem 1.25rem;          /* 内边距：左/右更宽，不再“贴边” */
-  margin: 0.9rem 0;               /* 上下间距：卡片之间拉开 */
-}
-
-/* 第一张卡片与横幅之间再留点距（可选） */
-.home .post-entry:first-of-type{ margin-top: 1.2rem; }
-
-/* 小屏左右也留一点外边距（避免贴屏） */
-@media (max-width: 680px){
+/* 中大屏稍微更松一点（可按喜好再调） */
+@media (min-width: 900px){
   .home .post-entry,
-  .list .post-entry{ margin-left: .5rem; margin-right: .5rem; }
+  .list .post-entry{
+    padding: 1.1rem 1.4rem 1.15rem;
+    margin: 1.1rem 0;
+  }
 }
 
-/* 卡片内层的小微调（可选） */
-.post-entry .entry-header h2{ margin: 0 0 .35rem; line-height: 1.35; }
-.post-entry .entry-content{ margin-top: .3rem; }
-.post-entry .entry-footer{ margin-top: .35rem; font-size: var(--fs-meta, .9rem); }
+/* 卡片内部的小间距微调（标题/摘要/元信息） */
+.post-entry .entry-header h2{ margin: 0 0 .4rem; line-height: 1.35; }
+.post-entry .entry-content{ margin-top: .35rem; }
+.post-entry .entry-footer{ margin-top: .4rem; font-size: var(--fs-meta, .9rem); }
+
+/* 如果你也在用自定义 .post-card，保持一致的内外距（可选） */
+.post-card{ padding: 1rem 1.25rem; margin: 1rem 0; }
