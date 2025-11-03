@@ -13,7 +13,7 @@ canonifyURLs = true
     url = "/"
     weight = 1
   [[menu.main]]
-    name = "文章"
+    name = "法考文章"
     url = "/posts/"
     weight = 2
   [[menu.main]]
@@ -28,10 +28,20 @@ canonifyURLs = true
     name = "搜索"
     url = "/search/"
     weight = 5
+
+ [[menu.main]]
+    name = "图书推荐📖"
+    url = "/posts/books/"
+    weight =6 
+
+ [[menu.main]]
+    name = "My Digital Hub"
+    url = "/posts/my-digital-hub/"
+    weight = 7
   [[menu.main]]
     name = "关于"
     url = "/about/"
-    weight = 6
+    weight = 8
 
 [taxonomies]
   tag = "tags"
