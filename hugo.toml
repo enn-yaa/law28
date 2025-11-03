@@ -31,12 +31,12 @@ canonifyURLs = true
 
  [[menu.main]]
     name = "图书推荐📖"
-    url = "/posts/books/"
+    url = "/books/"
     weight =6 
 
  [[menu.main]]
     name = "My Digital Hub"
-    url = "/posts/my-digital-hub/"
+    url = "/my-digital-hub/"
     weight = 7
   [[menu.main]]
     name = "关于"
